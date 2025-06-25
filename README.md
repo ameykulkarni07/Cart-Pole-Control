@@ -19,7 +19,7 @@ The CartPole-v1 environment from Gymnasium is a classic reinforcement learning b
   - Includes training in `/Decision Transformer` and evaluation scripts in `/Evaluation` 
   - Pre-trained models available in `/Decision Transformer`
 
-Decision Transformer was trained on 1000 episodes and evaluated on 500 episodes. The trained model was evaluated on 500 episodes. The result plots generated are for the longest episode achieved. The context length information is obtained from a simpler PID controller.
+Decision Transformer was trained on 1000 episodes and evaluated on 500 episodes. The result plots generated are for the longest episode achieved. The context length information is obtained from a simpler PID controller.
 
 
 
