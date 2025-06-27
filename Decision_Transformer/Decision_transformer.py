@@ -11,6 +11,9 @@ import time
 # ----------------------
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(device)
+
+
 
 """
 Part 1 - defines the Decision Transformer Model. The action dimensions and state dimensions are fixed for the environment of catpole-v1. 
@@ -22,7 +25,7 @@ from the input sequence of states, actions and returns to go.
 """
 
 class DecisionTransformer(nn.Module):
-    def __init__(self, state_dim=4, act_dim=2, embed_dim=128, num_layers=3, num_heads=4):
+    def __init__(self, state_dim=4, act_dim=2, embed_dim=64, num_layers=3, num_heads=2):
         super().__init__()
         self.embed_dim = embed_dim
 
@@ -73,7 +76,7 @@ We use 1000 episodes as generated from the generation script. The maximum length
 
 
 class TrajectoryDataset(Dataset):
-    def __init__(self, trajectories, seq_len=50):
+    def __init__(self, trajectories, seq_len=60):
         self.seq_len = seq_len
         self.data = []
 
@@ -118,7 +121,7 @@ def train():
 
     # Prepare dataset
     dataset = TrajectoryDataset(trajectories)
-    dataloader = DataLoader(dataset, batch_size=256, shuffle=True, pin_memory=True)
+    dataloader = DataLoader(dataset, batch_size=128, shuffle=True, pin_memory=True)
 
     # Initialize model
     model = DecisionTransformer().to(device)
@@ -160,7 +163,7 @@ def train():
         print(f"Epoch {epoch + 1} | Loss: {total_loss / len(dataloader):.4f}")
 
     # Save model
-    torch.save(model.state_dict(), 'dt_cartpole_seqlen50.pth')
+    torch.save(model.state_dict(), 'dt_cartpole_seqlen60.pth')
     print("Training complete. Model saved")
 
 # ----------------------

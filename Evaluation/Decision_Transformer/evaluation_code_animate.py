@@ -193,7 +193,7 @@ class CartPoleEvaluator:
         plt.grid(True)
 
         plt.tight_layout()
-        plt.savefig("cartpole_evaluation_results.png")
+        plt.savefig("cartpole_evaluation_results_recent.png")
         plt.show()
 
     '''
@@ -242,7 +242,7 @@ class CartPoleEvaluator:
 
 if __name__ == "__main__":
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    model_location = os.path.join(script_dir, '..', '..', 'Decision_Transformer', 'dt_cartpole_iter2_seqlen50.pth')
+    model_location = os.path.join(script_dir, '..', '..', 'Decision_Transformer', 'dt_cartpole_seqlen60.pth')
     model_location = os.path.normpath(model_location)
-    evaluator = CartPoleEvaluator(model_path=model_location, seq_len=50)
+    evaluator = CartPoleEvaluator(model_path=model_location, seq_len=60)
     results = evaluator.evaluate(num_episodes=500)
