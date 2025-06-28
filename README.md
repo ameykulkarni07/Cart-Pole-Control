@@ -1,7 +1,7 @@
 # Cart-Pole-Control
 A repository which tests various Reinforcement Learning algorithms to control the Cart Pole with inverted pendulum. The environment is from OpenAI Gymnasium. This repository was created when I started learning the practical implementation of reinforcement learning. 
 
-https://github.com/user-attachments/assets/3765bcfb-adba-426c-ac10-5fc6e37f4741
+https://github.com/user-attachments/assets/233083fa-76a2-41fb-8027-988ed9db6690
 
 (This is the video output file from one of the controls done by Decision Transformer.)
 
