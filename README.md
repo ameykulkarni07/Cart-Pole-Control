@@ -3,7 +3,7 @@ A repository which tests various Reinforcement Learning algorithms to control th
 
 https://github.com/user-attachments/assets/233083fa-76a2-41fb-8027-988ed9db6690
 
-(This is the video output file from one of the controls done by Decision Transformer.)
+(This is the video output file from one of the controls done by DQN.)
 
 ## Problem Description
 The CartPole-v1 environment from Gymnasium is a classic reinforcement learning benchmark where the agent must balance a pole on a moving cart. The system is controlled by applying forces of +1 (right) or -1 (left) to the cart. The episode ends when the pole tilts more than 12 degrees from vertical or the cart moves more than 2.4 units from the centre.
