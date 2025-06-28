@@ -3,10 +3,11 @@ import numpy as np
 import pickle
 
 
-def visualize_training_data(data_path='cartpole_dt_dataset_iter2.pkl'):
+def visualize_training_data(data_path='cartpole_dt_dataset_pid.pkl'):
     # Load the dataset
     with open(data_path, 'rb') as f:
-        trajectories = pickle.load(f)
+        data = pickle.load(f)
+        trajectories = data['trajectories']
 
     # Extract components from all trajectories
     all_states = np.concatenate([t['states'] for t in trajectories])

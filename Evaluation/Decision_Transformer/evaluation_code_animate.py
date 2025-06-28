@@ -3,7 +3,7 @@ import numpy as np
 import torch
 import matplotlib.pyplot as plt
 import os
-from Decision_Transformer.Decision_transformer import DecisionTransformer
+from Decision_Transformer.Decision_Transformer_2 import DecisionTransformer
 import time
 from gym import wrappers
 #import moviepy
@@ -19,12 +19,13 @@ class CartPoleEvaluator:
 
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"Model file {model_path} not found")
-        self.model.load_state_dict(torch.load(model_path, map_location=device))
-        self.model.eval()
 
-        # Dataset normalization values (adjust based on your dataset)
-        self.state_mean = torch.FloatTensor([0.0013, 0.0028, 0.00003, 0.00001]).to(device)
-        self.state_std = torch.FloatTensor([0.5603, 0.1746, 0.0099, 0.2160]).to(device)
+        checkpoint = torch.load(model_path, map_location=device, weights_only=False)
+        self.model.load_state_dict(checkpoint['model_state_dict'])
+        self.state_mean = torch.FloatTensor(checkpoint['state_mean']).to(device)
+        self.state_std = torch.FloatTensor(checkpoint['state_std']).to(device)
+        print("Loaded model with saved normalization parameters")
+        self.model.eval()
 
         # PID controller parameters (tuned for CartPole)
         self.kp = 1.2  # Proportional gain
@@ -193,10 +194,10 @@ class CartPoleEvaluator:
         plt.grid(True)
 
         plt.tight_layout()
-        plt.savefig("cartpole_evaluation_results_recent.png")
+        plt.savefig("cartpole_evaluation_results_samecontrol.png")
         plt.show()
 
-    '''
+
     # Uncommeent the section to animate and save the longest episode
 
     def _animate_longest_episode(self, results):
@@ -231,7 +232,7 @@ class CartPoleEvaluator:
         # The video is saved when the environment is closed
         anim_env.close()
         print(f"Video saved successfully in the '{video_path}' directory.")
-        '''
+
 
     def _print_statistics(self, results):
         durations = np.array(results['durations'])
@@ -242,7 +243,7 @@ class CartPoleEvaluator:
 
 if __name__ == "__main__":
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    model_location = os.path.join(script_dir, '..', '..', 'Decision_Transformer', 'dt_cartpole_seqlen60.pth')
+    model_location = os.path.join(script_dir, '..', '..', 'Decision_Transformer', 'dt_cartpole_seqlen50.pth')
     model_location = os.path.normpath(model_location)
-    evaluator = CartPoleEvaluator(model_path=model_location, seq_len=60)
-    results = evaluator.evaluate(num_episodes=500)
+    evaluator = CartPoleEvaluator(model_path=model_location, seq_len=50)
+    results = evaluator.evaluate(num_episodes=20)
