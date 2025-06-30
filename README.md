@@ -23,7 +23,7 @@ The decision transformer was tested for its generalisation ability. Two models o
 
 - **Deep Q Network** - Classical RL algorithm based on Q values. 
   - Implemented Experience Replay and target network for stable training
-  - Includes training script and trained model in /Deep_Q_Network` and evaluation scripts in `/Evaluation`
+  - Includes training script and trained model in `/Deep_Q_Network` and evaluation scripts in `/Evaluation`
  
 The DQN model was trained on 1000 episodes and was evaluated on several episodes. The result plots and control video was saved.
 
